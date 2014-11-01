@@ -11,22 +11,4 @@ class SiteController extends CController
         echo "Welcome to SCHUIZ!";
     }
 
-    public function actionGetTree()
-    {
-        $connection = Yii::app()->db;
-
-        $command = $connection->createCommand("SELECT * FROM faculties");
-
-        $result = $command->queryAll();
-
-        var_dump($result);
-
-    }
-
-    public function actionError($error)
-    {
-        var_dump($error);
-    }
-
-
 }

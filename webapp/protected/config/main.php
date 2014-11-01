@@ -82,10 +82,11 @@ return array(
                     : 'mysql:unix_socket=/cloudsql/schuiz-core:cloud-instance;dbname=schuiz;charset=utf8',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => ENV_DEV ? '' : 'schu1z-r00t',
+            'password' => ENV_DEV ? '' : '',
             'charset' => 'utf8',
             'class' => 'CDbConnection'
         ),
+
 
         'errorHandler' => array(
             // use 'site/error' action to display errors
