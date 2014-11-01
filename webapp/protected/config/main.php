@@ -79,7 +79,7 @@ return array(
         'db' => array(
             'connectionString' => ENV_DEV
                     ? 'mysql:host=localhost;dbname=schuiz'
-                    : 'mysql:unix_socket=/cloudsql/schuiz:cloud-instance;dbname=schuiz;charset=utf8',
+                    : 'mysql:unix_socket=/cloudsql/schuiz-core:cloud-instance;dbname=schuiz;charset=utf8',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => ENV_DEV ? '' : 'schu1z-r00t',

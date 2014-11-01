@@ -23,5 +23,10 @@ class SiteController extends CController
 
     }
 
+    public function actionError($error)
+    {
+        var_dump($error);
+    }
+
 
 }
