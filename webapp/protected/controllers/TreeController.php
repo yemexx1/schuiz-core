@@ -9,10 +9,9 @@
 class TreeController extends CController
 {
 
-
-    public function actiongettree()
+    public function actionGettree()
     {
-        header('Access-Control-Allow-Origin: *');
+
         $faculties = FacultyModel::model()->getAllFaculties();
         foreach ($faculties as &$faculty) {
             $departments = DepartmentModel::model()->getDepartments($faculty['id']);
@@ -26,7 +25,7 @@ class TreeController extends CController
             $faculty['num_childs'] = count($departments);
             $faculty['childs'] = $departments;
         }
-
+        header('Access-Control-Allow-Origin: *');
         echo json_encode($faculties);
 
    }

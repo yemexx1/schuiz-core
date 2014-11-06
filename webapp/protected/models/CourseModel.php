@@ -31,6 +31,13 @@ class CourseModel extends CActiveRecord
         return $courses;
     }
 
+    public function getAllCourses()
+    {
+        $command = $this->getDbConnection()->createCommand("select course_id as `id`,course_name as `name` from courses");
+        $courses = $command->queryAll();
+        return $courses;
+    }
+
     public function getDbConnection()
     {
         return Yii::app()->db;

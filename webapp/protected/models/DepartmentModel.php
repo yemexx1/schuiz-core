@@ -31,7 +31,6 @@ class DepartmentModel extends CActiveRecord
 
     public function getDepartments($faculty_id)
     {
-//        $departments = $this->findAll("faculty_id=:faculty_id", array("faculty_id" => $faculty_id));
         $command = $this->getDbConnection()->createCommand("select dept_id as `id`,dept_name as `name` from departments where faculty_id = $faculty_id");
         $departments = $command->queryAll();
         return $departments;

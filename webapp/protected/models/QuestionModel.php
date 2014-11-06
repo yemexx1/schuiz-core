@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: LANREWAJU
@@ -6,8 +7,8 @@
  * Time: 22:30
  * To change this template use File | Settings | File Templates.
  */
-
-class QuestionModel extends CActiveRecord{
+class QuestionModel extends CActiveRecord
+{
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -28,16 +29,21 @@ class QuestionModel extends CActiveRecord{
         return 'question_id';
     }
 
-    public function getQuestions()
+    public function getQuestions($course_id)
     {
-      //  $questions = $this->findAll();
-        $course = $this->findBySql("SELECT * from courses where course_code='$course_code'");
+        $command = $this->getDbConnection()->createCommand("select question_id, question, options, correct_answer as answer from questions where course_id = $course_id");
+        $questions = $command->queryAll();
         return $questions;
     }
 
-    public function getDepartment($dept_id)
+    public function addQuestion($course_id, $question, $options, $answer)
     {
-//        $department = $this->findByPk($dept_id);
-       // return $department;
+        $questionModel = new QuestionModel();
+        $questionModel->course_id = $course_id;
+        $questionModel->question = $question;
+        $questionModel->options = json_encode($options);
+        $questionModel->correct_answer = intval($answer);
+        return $questionModel->save();
     }
+
 }
