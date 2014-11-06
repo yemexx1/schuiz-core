@@ -19,11 +19,6 @@ class CourseModel extends CActiveRecord
         return 'courses';
     }
 
-    public function getDbConnection()
-    {
-        return Yii::app()->db;
-    }
-
     public function primaryKey()
     {
         return 'course_id';
@@ -31,8 +26,14 @@ class CourseModel extends CActiveRecord
 
     public function getCourses($dept_id)
     {
-        $faculties = $this->findAll("dept_id=:dept_id", array("dept_id" => $dept_id));
-        return $faculties;
+        $command = $this->getDbConnection()->createCommand("select course_id as `id`,course_name as `name` from courses where dept_id = $dept_id");
+        $courses = $command->queryAll();
+        return $courses;
+    }
+
+    public function getDbConnection()
+    {
+        return Yii::app()->db;
     }
 
     public function getCourse($course_id)
@@ -41,4 +42,10 @@ class CourseModel extends CActiveRecord
         return $course;
     }
 
+    public function getCourseByCode($course_code)
+    {
+//        $course = $this->findBySql("SELECT * from courses where course_code='CSC301'");
+        $course = $this->findBySql("SELECT * from courses where course_code='$course_code'");
+        return $course;
+    }
 } 

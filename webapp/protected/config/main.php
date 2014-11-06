@@ -6,6 +6,7 @@
 Yii::setPathOfAlias('assets', realpath(dirname(__FILE__) . '/../../assets'));
 
 // check environment dev or production
+//echo getenv("SERVER_SOFTWARE");
 if (strpos(getenv("SERVER_SOFTWARE"), 'Development') === 0) {
     define('ENV_DEV', true); // we are on development machine
 } else {

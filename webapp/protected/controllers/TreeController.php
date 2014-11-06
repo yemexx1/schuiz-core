@@ -10,25 +10,23 @@ class TreeController extends CController
 {
 
 
-    public function actionGettree()
+    public function actiongettree()
     {
         $faculties = FacultyModel::model()->getAllFaculties();
-
         foreach ($faculties as &$faculty) {
-            $departments = DepartmentModel::model()->getDepartments($faculty['faculty_id']);
+            $departments = DepartmentModel::model()->getDepartments($faculty['id']);
             foreach ($departments as &$department) {
-                $department = $department->attributes;
-                $courses = CourseModel::model()->getCourses($department['dept_id']);
-                foreach ($courses as &$course) {
-                    $course = $course->attributes;
-                }
-                $department['courses'] = $courses;
+                $courses = CourseModel::model()->getCourses($department['id']);
+                $department['num_childs'] = count($courses);
+                $department['childs'] = $courses;
             }
-            $faculty = $faculty->attributes;
-            $faculty['departments'] = $departments;
+            $faculty['num_childs'] = count($departments);
+            $faculty['childs'] = $departments;
         }
 
         echo json_encode($faculties);
-    }
+
+   }
+
 
 } 

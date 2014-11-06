@@ -31,7 +31,8 @@ class FacultyModel extends CActiveRecord
 
     public function getAllFaculties()
     {
-        $faculties = $this->findAll();
+        $command = $this->getDbConnection()->createCommand("select faculty_id as `id`,faculty_name as `name` from faculties");
+        $faculties = $command->queryAll();
         return $faculties;
     }
 
